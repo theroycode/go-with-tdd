@@ -6,21 +6,24 @@ import (
 )
 
 func TestSumAllTails(t *testing.T) {
-	t.Run("for defined size", func(t *testing.T) {
-		got := SumAllTails([]int{2, 4}, []int{3, 4, 8}, []int{7, 8, 1})
-		want := []int{4, 12, 9}
+	checkSums := func(t *testing.T, got, want []int) {
+		t.Helper()
 
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)
 		}
+	}
+	t.Run("for defined size", func(t *testing.T) {
+		got := SumAllTails([]int{2, 4}, []int{3, 4, 8}, []int{7, 8, 1})
+		want := []int{4, 12, 9}
+
+		checkSums(t, got, want)
 	})
 	t.Run("when empty array is passed", func(t *testing.T) {
 		got := SumAllTails([]int{2, 3}, []int{}, []int{3, 8})
 		want := []int{3, 0, 8}
 
-		if !reflect.DeepEqual(got, want) {
-			t.Errorf("got %v want %v", got, want)
-		}
+		checkSums(t, got, want)
 	})
 }
 func TestSumAll(t *testing.T) {
